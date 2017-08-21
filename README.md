@@ -1,5 +1,5 @@
 # golang travis-ci template
-![ci status](https://travis-ci.org/jandelgado/ci-test.svg?branch=master)
+![ci status](https://travis-ci.org/jandelgado/golang-ci-template.svg?branch=master) [![Go Report Card](https://goreportcard.com/badge/github.com/jandelgado/golang-ci-template)](https://goreportcard.com/report/github.com/jandelgado/golang-ci-template)
 
 This repository serves as my template for travis-ci-integrated go projects.  It
 consists of a `hello, world!` like example in source file `main.go` which gets
@@ -48,5 +48,5 @@ As soon as the release-tag is created, Travis will run the deployment step.
 
 ## TODO
 - add glide example
-- add unit tests
+- add unit tests and test coverage
 
