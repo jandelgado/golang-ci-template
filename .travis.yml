@@ -17,6 +17,7 @@ script:
 before_deploy:
 - zip ci-test-${TRAVIS_TAG}-windows-amd64.zip ci-test-windows-amd64.exe README.md
 - zip ci-test-${TRAVIS_TAG}-linux-amd64.zip ci-test-linux-amd64 README.md
+- sha256sum *zip > SHASUMS256.txt
 
 deploy:
   provider: releases
@@ -25,6 +26,7 @@ deploy:
   file: 
     - ci-test-${TRAVIS_TAG}-windows-amd64.zip
     - ci-test-${TRAVIS_TAG}-linux-amd64.zip
+    - SHASUMS256.txt
   skip_cleanup: true
   on:
     tags: true
