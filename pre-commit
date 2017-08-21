@@ -8,19 +8,19 @@ if [ -n "${INEFFASSIGN_ERRORS}" ]; then
   exit 1
 fi
 
-MISSPELL_ERRORS=$(misspell *go app/main/*go)
+MISSPELL_ERRORS=$(misspell *go)
 if [ -n "${MISSPELL_ERRORS}" ]; then
   printf >&2 'misspell failed for the following files:\n%s\n' "${MISSPELL_ERRORS}"
   exit 1
 fi
 
-GOCYCLO_ERRORS=$(gocyclo -over $MAX_CYCLO *go app/main/*go)
+GOCYCLO_ERRORS=$(gocyclo -over $MAX_CYCLO *go)
 if [ -n "${GOCYCLO_ERRORS}" ]; then
   printf >&2 'gocyclo failed for the following files:\n%s\n' "${GOCYCLO_ERRORS}"
   exit 1
 fi
 
-GOFMT_FILES=$(gofmt -l *go app/main/*go)
+GOFMT_FILES=$(gofmt -l *go)
 if [ -n "${GOFMT_FILES}" ]; then
   printf >&2 'gofmt failed for the following files:\n%s\n\nplease run "gofmt -w ." on your changes before committing.\n' "${GOFMT_FILES}"
   exit 1
@@ -32,7 +32,7 @@ if [ -n "${GOLINT_ERRORS}" ]; then
   exit 1
 fi
 
-GOVET_ERRORS=$(go tool vet --all *.go 2>&1; go tool vet --all app/main/*go 2>&1)
+GOVET_ERRORS=$(go tool vet --all *.go 2>&1)
 if [ -n "${GOVET_ERRORS}" ]; then
   printf >&2 'go vet failed for the following reasons:\n%s\n\nplease run "go tool vet *.go" on your changes before committing.\n' "${GOVET_ERRORS}"
   exit 1
