@@ -1,5 +1,9 @@
 # ci-test
-Just testing travis-ci ...
+![ci status](https://travis-ci.org/jandelgado/ci-test.svg?branch=master)
+This repository serves as my template for travis-integration of go projects.
+It consists of a `hello, world!` like example in source file `main.go` which
+gets compiled into binary `citest`. The `pre-commit` script runs some checks
+on the code. 
 
 ## Releasing
 ### recommended client tools
@@ -19,7 +23,7 @@ deploy:
   provider: releases
   api_key:
     secure: ZSqZx+Ej1m........
-  file: main
+  file: citest
   on:
     repo: jandelgado/ci-test
 ```
