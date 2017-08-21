@@ -1,7 +1,7 @@
-# Go CI template
+# golang travis-ci template
 ![ci status](https://travis-ci.org/jandelgado/ci-test.svg?branch=master)
 
-This repository serves as my template for travis-integrated go projects.  It
+This repository serves as my template for travis-ci-integrated go projects.  It
 consists of a `hello, world!` like example in source file `main.go` which gets
 compiled into binary `ci-test`. The `pre-commit` script runs some checks on the
 code. When a new release is created, the released-artifacts are automatically
@@ -25,6 +25,11 @@ Set up deployment in .travis.yml and create encrypted api-key with:
 This will ask some questions and create the `deploy` section in i
 the [.travis.yml](.travis.yml), modify it to look like:
 ```
+before_deploy:
+- zip ci-test-${TRAVIS_TAG}-windows-amd64.zip ci-test-windows-amd64.exe README.md
+- zip ci-test-${TRAVIS_TAG}-linux-amd64.zip ci-test-linux-amd64 README.md
+- sha256sum *zip > SHASUMS256.txt
+
 deploy:
   provider: releases
   api_key:
