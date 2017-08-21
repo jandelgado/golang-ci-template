@@ -1,10 +1,11 @@
-# ci-test
+# Go CI template
 ![ci status](https://travis-ci.org/jandelgado/ci-test.svg?branch=master)
 
 This repository serves as my template for travis-integration of go projects.
 It consists of a `hello, world!` like example in source file `main.go` which
 gets compiled into binary `ci-test`. The `pre-commit` script runs some checks
-on the code. 
+on the code. When a new release is created, the released-artifacts are 
+automatically uploaded to github and available on the [release page](https://github.com/jandelgado/ci-test/releases/).
 
 ## Releasing
 ### recommended client tools
@@ -18,7 +19,7 @@ Set up deployment in .travis.yml and create encrypted api-key with:
 `$ travis setup release --force`
 
 This will ask some questions and create the `deploy` section in i
-the (.travis.yml)[.travis.yml] file:
+the [.travis.yml](.travis.yml) file:
 ```
 deploy:
   provider: releases
