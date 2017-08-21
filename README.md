@@ -1,5 +1,6 @@
 # ci-test
 ![ci status](https://travis-ci.org/jandelgado/ci-test.svg?branch=master)
+
 This repository serves as my template for travis-integration of go projects.
 It consists of a `hello, world!` like example in source file `main.go` which
 gets compiled into binary `ci-test`. The `pre-commit` script runs some checks
@@ -30,4 +31,7 @@ deploy:
 
 ### Creating a release
 
+## TODO
+- add glide example
+- add unit tests
 
