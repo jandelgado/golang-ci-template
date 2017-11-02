@@ -1,4 +1,5 @@
 *~
-ci-test-*
+golang-ci-template
 *zip
+*.out
 

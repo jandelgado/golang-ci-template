@@ -1,4 +1,5 @@
 #!/bin/sh
+# inspired from https://github.com/streadway/amqp/blob/master/pre-commit
 
 MAX_CYCLO=15
 

@@ -1,18 +1,22 @@
 language: go
 go:
-- 1.7.x
 - 1.8.x
+- 1.9.x
 
 before_install:
 - go get github.com/golang/lint/golint
 - go get github.com/gordonklaus/ineffassign
 - go get github.com/fzipp/gocyclo
-- go get -u github.com/client9/misspell/cmd/misspell
+- go get github.com/client9/misspell/cmd/misspell
+- go get golang.org/x/tools/cmd/cover
+- go get github.com/mattn/goveralls
 
 script:
 - "./pre-commit"
+- go test -v -covermode=count -coverprofile=coverage.out
 - GOOS=windows GOARCH=amd64 go build -o ci-test-windows-amd64.exe
 - GOOS=linux   GOARCH=amd64 go build -o ci-test-linux-amd64
+- goveralls -coverprofile=coverage.out -service=travis-ci -repotoken $COVERALLS_TOKEN
 
 before_deploy:
 - zip ci-test-${TRAVIS_TAG}-windows-amd64.zip ci-test-windows-amd64.exe README.md
@@ -23,11 +27,14 @@ deploy:
   provider: releases
   api_key:
     secure: ZSqZx+Ej1mFm5vFjAYvBmVVUfulT7xaRkjVL3Wh13N3pVroUtRi6mwAHfcXdIprGa1rToCIP66BQD8q26DLe2kwEYNJK2gtvbjNzsOPJgmtLoBW7GKW0p9gm0MXFCNmwVwGEJUpTvi4aWNIHIVqrLrAA2adrfF1eIepBOYB5Iu6wDqa0WKnbuVd87+Bx17XquhNZCETKBUpvAL4v3D2shkxz/twOJnVTms5JuJUZ5mKNZo99PlsoW1GtfwKHDNw6ChE8pl96cCvLQz4AyBxF8BIDfNSWW9QrcxyNGzesKa2+Q5IcBPQ7v/RfuEnVctiCQqvnrZ65cKvn2edbH1j35gTRINGo9lzHWNqGGPKhAbiloeKIRXV/6L3ClewwTY4w+rTwxy8Ted4MWcGSAdMdVlodIXT7PGJ1IdJy16iw23DND4PqNEcwJyvYypoXFJ0vPz3yG8CtM5KI7C+2wNRVnm9J46m430wjlqa19YI/1DlFS+iE2KYAVvtVAJfS/fuJy6Y/db8rh2LqW2OaOMX5al8iT3dSaqkQjxiOfynITJQXiYrsoFpYoDEDbkvTG6L6oaDq3kudCvcHeYugAm61TORCKeDPtIZoInZUhw+in3DTN9zv/qJ7HHQ5LBjFwyggRGSmP33A6tvKxyXhkRXH/6UzLC0yT80lWAkEiuabbmw=
-  file: 
-    - ci-test-${TRAVIS_TAG}-windows-amd64.zip
-    - ci-test-${TRAVIS_TAG}-linux-amd64.zip
-    - SHASUMS256.txt
+  file:
+  - ci-test-${TRAVIS_TAG}-windows-amd64.zip
+  - ci-test-${TRAVIS_TAG}-linux-amd64.zip
+  - SHASUMS256.txt
   skip_cleanup: true
   on:
     tags: true
 
+env:
+  global:
+    secure: e77l5tQAk5BdR7r407eIgt/0IFzSht2gV0YkqChneog6HWq1Jq9F+8/J2hKSpnpzGZ/G561P7/c2RKko1CaHWLAdN69jvoEW4jNwTvVpSRlbf8byU4l93zptVARG0V5oaQus+HdS8kX8bXzLB4x/s78SlCS5kMHbk8nFAHT2+TBD5cLaQMCcM9XWzTYPeMWACdQcIxSLzlBIW8AfCDfUc7C+oSpAv+SAsvBVP6c1xNxDJ7cHMS72xH8mtX2valnD8QbBX8pRW7ttoJYWg4VyX4F3I8Ovzo5u0mCM0rcRxIji07q3kyXVOp5agnE/E9LCDPBUBnQE4MR42juSTeckDEmwWZgngt91k0GkvVnKH5Ef4DJR8r9dYXG414FkdfDBEuMkjNX8D+z/wwvCIAXAqZIFRsSl7yJ9KdTWfOmSDEP3XFGRqb905YvWvMgcHg8oKwdncLXFnlZ7N91Zh2iB2F9t4XshodYpKGi0p31B/azLcqTtwJc6adrK4aSkkGsb26KuO6Xgpp9bnTa0FJECwkrg9Hz0N0ZWu914g3jzT1OSeOVNXQaLtK1je4/Uj5ZKCksiMxi718EAQabKZ1bMP/1gvyJj5NRU8Z6sGJr54rBEDLkhcfNvPbw7ty5p+baCmPUSYdA9UFX1f5ZexSpaKNqcnY0FlDqAdzAy1aj4opY=
