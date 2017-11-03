@@ -7,8 +7,8 @@
 
 * [Releasing](#releasing)
     * [travis-ci cli](#travis-ci-cli)
-    * [coveralls test coverage](#coveralls-test-coverage)
     * [Creating a release](#creating-a-release)
+* [Test coverage (coveralls)](#test-coverage-coveralls)
 
 <!-- vim-markdown-toc -->
 
@@ -57,16 +57,16 @@ deploy:
     tags: true
 ```
 
-### coveralls test coverage
-
-Create coveralls account and activate coveralls for repositiory. Encrypt 
-coveralls token with `travis encrypt COVERALLS_TOKE="<token>"`.
-
-For instructions on using goveralls look [here](https://coveralls.zendesk.com/hc/en-us/articles/201342809-Go).
-
 ### Creating a release
 
 On your repositories home (github.com) go to `Releases` > `create realease`.
 As soon as the release-tag is created, Travis will run the deployment step.
 
+
+## Test coverage (coveralls)
+
+Create coveralls account and activate coveralls for repositiory. Encrypt 
+coveralls token with `travis encrypt COVERALLS_TOKE="<token>"`.
+
+For instructions on using goveralls look [here](https://coveralls.zendesk.com/hc/en-us/articles/201342809-Go).
 
