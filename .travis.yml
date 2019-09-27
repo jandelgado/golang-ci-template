@@ -1,22 +1,20 @@
 language: go
 go:
-- 1.8.x
-- 1.9.x
+- 1.12.x
+- 1.13.x
 
 before_install:
-- go get github.com/golang/lint/golint
-- go get github.com/gordonklaus/ineffassign
-- go get github.com/fzipp/gocyclo
-- go get github.com/client9/misspell/cmd/misspell
-- go get golang.org/x/tools/cmd/cover
-- go get github.com/mattn/goveralls
+- go get -u github.com/mattn/goveralls
+- go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
 
 script:
+- export GO111MODULE=on
 - "./pre-commit"
 - go test -v -covermode=count -coverprofile=coverage.out
 - GOOS=windows GOARCH=amd64 go build -o ci-test-windows-amd64.exe
-- GOOS=linux   GOARCH=amd64 go build -o ci-test-linux-amd64
-- goveralls -coverprofile=coverage.out -service=travis-ci -repotoken $COVERALLS_TOKEN
+- GOOS=linux   GOARCH=amd64 go build -o ci-test
+- 'if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then goveralls -coverprofile=coverage.out -service=travis-ci -repotoken $COVERALLS_TOKEN; fi'
+- 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then goveralls -coverprofile=coverage.out -service=travis-ci ; fi'
 
 before_deploy:
 - zip ci-test-${TRAVIS_TAG}-windows-amd64.zip ci-test-windows-amd64.exe README.md
