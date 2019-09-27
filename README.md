@@ -11,7 +11,7 @@
 * [Test coverage (coveralls)](#test-coverage-coveralls)
 
 <!-- vim-markdown-toc -->
-
+ 
 This repository serves as my template for travis-ci-integrated go projects.  It
 consists of a `hello, world!` like example in source file `main.go` which gets
 compiled into binary `ci-test`. The `pre-commit` script runs some checks on the
