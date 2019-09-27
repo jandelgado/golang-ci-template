@@ -19,7 +19,9 @@ jobs:
         go get github.com/mattn/goveralls
         go get github.com/golangci/golangci-lint/cmd/golangci-lint
     - name: Linter
-      run: ls -lR; ./pre-commit
+      run: |
+        export PATH=$PATH:$(go env GOPATH)/bin   
+        ./pre-commit
     - name: Test
       run: go test -v -covermode=count -coverprofile=coverage.out
 
