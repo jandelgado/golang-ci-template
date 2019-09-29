@@ -1,6 +1,8 @@
-# golang travis-ci template
+# golang travis-ci template (Github Action)
 
-![ci status](https://travis-ci.org/jandelgado/golang-ci-template.svg?branch=master) [![Coverage Status](https://coveralls.io/repos/github/jandelgado/golang-ci-template/badge.svg?branch=master)](https://coveralls.io/github/jandelgado/golang-ci-template?branch=master) [![Go Report Card](https://goreportcard.com/badge/github.com/jandelgado/golang-ci-template)](https://goreportcard.com/report/github.com/jandelgado/golang-ci-template) 
+![ci status](https://travis-ci.org/jandelgado/golang-ci-template.svg?branch=master) 
+[![Coverage Status](https://coveralls.io/repos/github/jandelgado/golang-ci-template/badge.svg?branch=master)](https://coveralls.io/github/jandelgado/golang-ci-template?branch=master) 
+[![Go Report Card](https://goreportcard.com/badge/github.com/jandelgado/golang-ci-template)](https://goreportcard.com/report/github.com/jandelgado/golang-ci-template) 
 
 
 <!-- vim-markdown-toc GFM -->
