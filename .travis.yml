@@ -13,8 +13,8 @@ script:
 - go test -v -covermode=count -coverprofile=coverage.out
 - GOOS=windows GOARCH=amd64 go build -o ci-test-windows-amd64.exe
 - GOOS=linux   GOARCH=amd64 go build -o ci-test
-- 'if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then goveralls -coverprofile=coverage.out -service=travis-ci -repotoken $COVERALLS_TOKEN; fi'
-- 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then goveralls -coverprofile=coverage.out -service=travis-ci ; fi'
+  # uses COVERALLS_TOKEN if set (during push)
+- goveralls -coverprofile=coverage.out -service=travis-ci 
 
 before_deploy:
 - zip ci-test-${TRAVIS_TAG}-windows-amd64.zip ci-test-windows-amd64.exe README.md
